@@ -1,0 +1,23 @@
+.task{
+    display: flex ;
+    justify-content: space-between;
+    align-items: center;
+    width: 25em;
+    border: solid;
+    height: fit-content;
+}
+
+.task > div{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.icons{
+    opacity: 0;
+    transform: scale(1.1);
+    cursor: pointer;
+    transition-duration: .2s
+}
+
+
