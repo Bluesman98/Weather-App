@@ -19,6 +19,17 @@ eval("/* module decorator */ module = __webpack_require__.nmd(module);\nvar __WE
 
 /***/ }),
 
+/***/ "./src/another-module.js":
+/*!*******************************!*\
+  !*** ./src/another-module.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"project\": () => (/* binding */ project),\n/* harmony export */   \"task\": () => (/* binding */ task)\n/* harmony export */ });\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ \"./node_modules/lodash/lodash.js\");\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);\n\r\n\r\nfunction task (){\r\n    return{\r\n    title: 'wash dishes',\r\n    description: 'bla bla bla',\r\n    dueDate: 'MM/dd/yy',\r\n    priority: 0,\r\n    checklist: false\r\n    }\r\n}\r\n\r\nfunction project(){\r\n    let todosList =[]\r\n    return{\r\n        title: \"New Project\",\r\n        todosList,\r\n\r\n        add(task){\r\n            todosList.push(task);\r\n        },\r\n\r\n        remove(index){\r\n            todosList.splice(index,1)\r\n        }\r\n    }\r\n    \r\n}\r\n\r\n\r\n\r\n\n\n//# sourceURL=webpack://Todo/./src/another-module.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -26,7 +37,7 @@ eval("/* module decorator */ module = __webpack_require__.nmd(module);\nvar __WE
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ \"./node_modules/lodash/lodash.js\");\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);\n\n\n\n function component() {\n   const element = document.createElement('div');\n\n  // Lodash, currently included via a script, is required for this line to work\n\n  // Lodash, now imported by this script\n   element.innerHTML = lodash__WEBPACK_IMPORTED_MODULE_0___default().join(['Hello', 'webpack'], ' ');\n\n   return element;\n }\n\n document.body.appendChild(component());\n\n//# sourceURL=webpack://Todo/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ \"./node_modules/lodash/lodash.js\");\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _another_module_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./another-module.js */ \"./src/another-module.js\");\n\n\n\nconst main = document.querySelector('.main');\n\nfunction createTodo (task){\n  let todo = document.createElement('div');\n  todo.classList.add('task')\n\n  let left = document.createElement('div');\n  let check = document.createElement('input');\n  check.type = 'checkbox';\n  left.appendChild(check);\n  let title = document.createElement('div');\n  title.textContent = task.title;\n  left.append(title)\n  todo.appendChild(left);\n\n  let right = document.createElement('div')\n  let date = document.createElement('div')\n  date.textContent = task.dueDate;\n  right.append(date)\n  let icons = document.createElement('div')\n  icons.classList.add('icons')\n  let icon1 = document.createElement('img')\n  icon1.src = './icons/delete.svg'\n  icons.appendChild(icon1)\n  let icon2 = document.createElement('img')\n  icon2.src = './icons/edit.svg'\n  icons.appendChild(icon2)\n  right.appendChild(icons)\n  todo.appendChild(right);\n\n  todo.addEventListener('mouseover',()=>{icons.style.opacity = 1;})\n  todo.addEventListener('mouseout',()=>{icons.style.opacity = 0;})\n  main.append(todo)\n}\n\nlet task1 = (0,_another_module_js__WEBPACK_IMPORTED_MODULE_1__.task)();\ncreateTodo(task1);\n\n//# sourceURL=webpack://Todo/./src/index.js?");
 
 /***/ })
 
