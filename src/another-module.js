@@ -6,16 +6,17 @@ function task (){
     description: 'bla bla bla',
     dueDate: 'MM/dd/yy',
     priority: 0,
-    checklist: false
+    checklist: false,
+    id: -1
     }
 }
 
 function project(){
     let todosList =[]
     return{
-        title: "New Project",
+        id : 'none',
+        title: "project1",
         todosList,
-
         add(task){
             todosList.push(task);
         },
@@ -27,8 +28,27 @@ function project(){
     
 }
 
+function projectsList(){
+    let list = []
+    let counter = 0;
+    return{
+        list,
+
+        add(project){
+            list.push(project)
+            project.id = counter;
+            counter++
+        },
+
+        remove(index){
+            list.splice(index,1)
+        }
+    }
+}
+
 export  {
     task,
-    project
+    project,
+    projectsList
   };
 
