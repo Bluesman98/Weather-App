@@ -1,6 +1,7 @@
-import _ from 'lodash';
+import _, { curry } from 'lodash';
 import {project, task, projectsList} from './another-module.js';
 import { format, formatDistance, formatRelative, subDays } from 'date-fns'
+import { te } from 'date-fns/locale';
 
 
 const main = document.querySelector('.main');
@@ -343,14 +344,14 @@ function  buttonEvents(project,todo,task){
 
     saveLocal()
     restore()
-
-    let id = todo.id
-    if(id.length == 2) id = id[0]
-    let currentProject = document.querySelector(`#project${project.id}`)
-    currentProject.classList.add('project-visible')
-  })
-  todo.querySelector('.edit').addEventListener('click',() => {
-    
+    currentProject(project.id)
+   })
+    //let id = todo.id
+    //if(id.length == 2) id = id[0]
+  
+   todo.querySelector('.edit').addEventListener('click',() => {
+    openModal(modal, '.modal-task-edit');
+    console.log('edit')
     let title = document.querySelector('#title');
     title.value = task.title;
     let details = document.querySelector('#details');
@@ -372,14 +373,14 @@ function  buttonEvents(project,todo,task){
       updateTodo(todo,task);
       console.log(projects)
       restore()
-      let currentProject = document.querySelector(`#project${project.id}`)
-      currentProject.classList.add('project-visible')
+      currentProject(project.id)
       }
     }
     
-    openModal(modal, '.modal-task-edit');
   })
 }
+
+
 function checkboxEvent (checkbox,task,project,todo){
   if(task.checklist == true) {
     checkbox.checked = true; 
@@ -413,8 +414,7 @@ function checkboxEvent (checkbox,task,project,todo){
     }
     saveLocal();
     restore();
-    let currentProject = document.querySelector(`#project${project.id}`)
-    currentProject.classList.add('project-visible')
+    currentProject(project.id)
   });
 
 }
@@ -447,8 +447,6 @@ function createProject(project,projects){
   projects.add(project)
   let id =  project.id
 
-
- 
   let projectDiv = document.createElement('div')
   let div = document.createElement('div')
   projectDiv.appendChild(div)
@@ -457,26 +455,32 @@ function createProject(project,projects){
   projectDiv.classList.add('project')
   let ul = document.querySelector('ul +ul')
   let li = document.createElement('li')
+  li.id = "li" + project.id
   li.addEventListener('click',() =>{
+   /* let lis =  document.querySelectorAll('li')
+    lis.forEach(lis  =>{
+      lis.classList.remove('current-project')
+      })*/
     let items =  document.querySelectorAll('.project')
     items.forEach(item  =>{
-      item.classList.remove('project-visible')
+    item.classList.remove('project-visible')
     })
-    let currentProject = document.querySelector(`#project${id}`)
-    currentProject.classList.add('project-visible')
+    restore()
+    currentProject(project.id)
     let confirm = document.querySelector('.project-confirm')
     confirm.onclick = () =>{
         projectEdit(project)
         projectUpdate(project)
         saveLocal()
         restore()
-        let currentProject = document.querySelector(`#project${project.id}`)
-        currentProject.classList.add('project-visible')
+        currentProject(project.id)
     }
       
     let deleteBtn = document.querySelector('.project-delete')
     deleteBtn.onclick = ()=>{
-      deleteProject(project,li)
+      console.log("project to delete")
+      console.log(project)
+      deleteProject(project)
       let window = modal.querySelector('.modal-project-edit')
       modal.classList.remove('modal-visible');
       window.classList.remove('modal-visible')
@@ -513,14 +517,14 @@ function projectUpdate(project){
  
   btn.textContent = project.title
 }
-function deleteProject(project,li){
+function deleteProject(project){
+  console.log(project)
   let projectDiv = document.querySelector(`#project${project.id}`)
   let div = document.querySelector('.project-container')
   div.removeChild(projectDiv)
-  let index = projects.list.indexOf(project)
-  projects.remove(index)
-  let ul = document.querySelector('ul+ul')
-  ul.removeChild(li)
+  projects.remove(project.id)
+  let li = document.querySelector(`#li${project.id}`)
+  li.remove()
   console.log(projects.list)
 }
 
@@ -533,7 +537,6 @@ const addProject = function(){
   let div2 = document.createElement('div')
   div2.textContent = "Add Project"
   btn.appendChild(div2)
- // btn.textContent = "Add Project"
   sidebar.appendChild(btn)
 
   btn.addEventListener('click', () =>{
@@ -542,15 +545,21 @@ const addProject = function(){
 
     let add = document.querySelector('.add-project')
     add.onclick =  () => {
-      let title =document.querySelector('#new-project-title')
+      let title = document.querySelector('#new-project-title')
       if (title.value != '') {
-        newProject(title.value)
+        let temp = newProject(title.value)
         let window = modal.querySelector('.modal-new-project')
         modal.classList.remove('modal-visible');
         window.classList.remove('modal-visible');
         title.value = ''
+
+        console.log("ID")
+        console.log(temp.id)
+
         saveLocal();
         restore();
+        currentProject(temp.id)
+        
       }
 
     }
@@ -562,8 +571,8 @@ function newProject (title){
   x.title = title
   createProject(x,projects)
   projectButton(x)
-  let currentProject = document.querySelector(`#project${x.id}`)
-  currentProject.classList.add('project-visible')
+
+  return x;
 }
 
 const addTask = function(project){
@@ -577,18 +586,22 @@ const addTask = function(project){
   btn.appendChild(btnDiv)
   div.appendChild(btn)
   btn.onclick = () =>{
+    console.log("current Project")
+    console.log(project)
    openModal(modal,'.modal-new-task')
    closeModal(modal,'.modal-new-task')
    let confirm = document.querySelector('.add-task')
-   confirm.addEventListener('click',() =>{
+   confirm.onclick = () =>{
     newTask(project)
-   })
+
+   }
 
     }
   }
 
 
 function newTask(project) {
+  console.log(project)
   let title = document.getElementById('new-title').value
   let details = document.getElementById('new-details').value
   let date = document.getElementById('new-date').value
@@ -615,8 +628,7 @@ function newTask(project) {
 
     saveLocal()
     restore()
-    let currentProject = document.querySelector(`#project${project.id}`)
-    currentProject.classList.add('project-visible')
+    currentProject(project.id)
   }
 }
 
@@ -648,14 +660,11 @@ function restore() {
 
     for(let j=0; j < tasks.length; j++){
       tasks[j].id=j
-     // tasks[j].dueDate=tasks[j].dueDate
-     // tasks[j].checklist = tasks[j].checklist
       createTodo(temp,tasks[j])
       tasks[j].id=`${i}${j}`
       allTasks.add(tasks[j])
     }
   }
-  //let [dates,week,today] = sort(allTasks);
   let [home,week,today] =sort(allTasks)
   createStandardProject(home,'Home')
   createStandardProject(today,'Today')
@@ -719,13 +728,11 @@ function getArray(array,index){
 }
 function getWeekDates() {
   let start = getMondayOfCurrentWeek()
- // start.setDate(numDay - dayOfWeek);
   start.setHours(0, 0, 0, 0);
 
 
   let end = new Date(start); //copy
   end.setDate(end.getDate() + 7)
-  //end.setDate(numDay + (7 - dayOfWeek));
   end.setHours(0, 0, 0, 0);
 
   return [start, end];
@@ -790,33 +797,51 @@ function standardProject(project,string){
   projectDiv.classList.add('project')
   let ul = document.querySelector('ul')
   let li = document.createElement('li')
+  
+  li.id = "li" + project.id
+  let i = document.createElement('i')
+  if (project.id == "Home")i.classList.add("fa-house","fa-solid")
+  if (project.id == "Today")i.classList.add("fa-solid", "fa-calendar-day")
+  if (project.id == "Week")i.classList.add("fa-solid", "fa-calendar-week")
+  li.appendChild(i)
+  li.innerHTML += project.title
   li.addEventListener('click',() =>{
-    restore()
-    
+    /*let lis =  document.querySelectorAll('li')
+    lis.forEach(lis  =>{
+      lis.classList.remove('current-project')
+      })
     let items =  document.querySelectorAll('.project')
     items.forEach(item  =>{
-      item.classList.remove('project-visible')
-    })
-    let currentProject = document.querySelector(`#project${id}`)
-    currentProject.classList.add('project-visible')
+    item.classList.remove('project-visible')
+    })*/
+    restore()
+    currentProject(project.id)
+    //li.classList.add('current-project')
       
   })
   ul.append(li)
-  li.textContent = project.title
+
+
+}
+
+function currentProject(id){
+  console.log(document.querySelector(`#project${id}`))
+  if(document.querySelector(`#project${id}`)!=null){
+  console.log(projects.list)
+  let currentProject = document.querySelector(`#project${id}`)
+  currentProject.classList.add('project-visible')
+  let li = document.querySelector(`#li${id}`)
+  li.classList.add('current-project')
+  }
 }
 //.....................//
 const modal = createModal();
 closeModal(modal,'.modal-task-edit',);
 
 
-const projects = restore()
+const projects = restore();
 if ( document.querySelector(`#projectHome`)){
-let currentProject = document.querySelector(`#projectHome`)
-currentProject.classList.add('project-visible')}
+currentProject(`Home`)
+
+}
 addProject();
-
-
-
-
-
-
