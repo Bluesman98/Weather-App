@@ -23,6 +23,7 @@ body{
     align-items: center;
     padding-left: 3rem;
     box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+    gap:1rem;
 }
 
 .sidebar{
@@ -39,7 +40,11 @@ body{
     padding-left: 2rem;
     padding-right: 2rem;
 }
-
+.sidebar>ul>li{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
 .sidebar>div{
     display: flex;
     align-items: center;
@@ -95,7 +100,6 @@ li{
     line-height: 2.5rem;
 }
 
-
 li:hover{
     color: white;
     cursor: pointer;
@@ -103,7 +107,16 @@ li:hover{
     transform-origin: 50% 50%;
     transition: all .2s ease-out;
     background-color:#6B7280;
+    border-radius: 5px;
+}
 
+.current-project{
+    color: white;
+    cursor: pointer;
+    transform: scale(1.1);
+    transform-origin: 50% 50%;
+    transition: all .2s ease-out;
+    background-color:#6B7280;
     border-radius: 5px;
 }
 .project-container{
