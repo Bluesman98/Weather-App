@@ -1,0 +1,60 @@
+.search-bar{
+display: flex;
+margin-bottom: 2rem;
+}
+.search-bar>div{
+    display: flex;
+    flex-direction: column;
+}
+.error{
+    font-size: .75rem;
+}
+.weather-card{
+    display: flex;
+    flex-direction: column;
+    border: .1rem solid;
+    gap: 1rem;
+    width: fit-content;
+    height: fit-content;
+    padding: 1.5rem;
+    border-radius: 5px;
+}
+.weather-card>div{
+    display: flex;
+    height:3rem;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.weather-card>div:first-child{
+    height: fit-content;
+    flex-direction: column;
+    justify-items: start;
+    align-items: flex-start;
+    gap:0;
+}
+.weather-card>div>span:first-child{
+ font-size: 1.5rem;
+}
+.weather-card>div>span+span{
+    font-size: .8rem;
+}
+.date-container{
+    display: flex;
+    align-items: start !important;
+    flex-direction: column;
+    flex:1;
+}
+.temp-container>div{
+    display: flex;
+    flex-direction: column;
+    flex:1;
+    gap: 0.3rem;
+}
+.temp-container>div>div+div{
+    font-size: .75rem;
+}
+i{
+    font-size: 3rem;
+}
+
