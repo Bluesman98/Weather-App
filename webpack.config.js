@@ -1,6 +1,8 @@
 const path = require('path');
 
 module.exports = {
+  
+  watch: true,
 
  entry:'./src/index.js',
 
@@ -10,7 +12,7 @@ module.exports = {
 
    index: './src/index.js',
 
-   another: './src/another-module.js',
+   another: './src/weather-api.js',
 
  },
   output: {
