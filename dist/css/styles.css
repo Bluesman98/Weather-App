@@ -293,11 +293,11 @@ input[type="radio"] {
   width: calc(var(--font-size)*4);
   border-radius: 3px;
   font-weight: 800;
-
+  cursor: pointer
 }
 
-input[type="radio"] :hover {
-  cursor: pointer;
+input[type="radio"]:hover {
+  cursor: pointer !important;
 }
 
 input[type="radio"]:checked {
