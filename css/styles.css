@@ -1,60 +1,307 @@
-.search-bar{
-display: flex;
-margin-bottom: 2rem;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
+:root {
+  --font-size: 1.9rem;
 }
-.search-bar>div{
-    display: flex;
+@media screen and (max-width: 768px) {
+  :root {
+    --font-size: 1rem !important;
+  }
+
+  body {
+    background-size: cover;
+  }
+  .bottom {
+    display: flex !important ;
     flex-direction: column;
+    gap: 2rem !important;
+  }
 }
-.error{
-    font-size: .75rem;
+@media screen and (max-width: 1200px) {
+  :root {
+    --font-size: 1rem !important;
+  }
+
+  body {
+    background-size: cover !important;
+  }
+  .bottom {
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: 1fr 1fr 1fr !important;
+    gap: 3rem;
+  }
 }
-.weather-card{
-    display: flex;
-    flex-direction: column;
-    border: .1rem solid;
-    gap: 1rem;
-    width: fit-content;
-    height: fit-content;
-    padding: 1.5rem;
-    border-radius: 5px;
-}
-.weather-card>div{
-    display: flex;
-    height:3rem;
-    align-items: center;
-    gap: 0.5rem;
+@media screen and (min-width: 3000px) {
+  .main {
+    font-size: 3rem !important;
+  }
+  .bottom {
+    display: flex !important ;
+    gap: 4rem;
+    justify-content: space-evenly;
+    padding-left: 8rem;
+    padding-right: 8rem;
+  }
 }
 
-.weather-card>div:first-child{
-    height: fit-content;
-    flex-direction: column;
-    justify-items: start;
-    align-items: flex-start;
-    gap:0;
-}
-.weather-card>div>span:first-child{
- font-size: 1.5rem;
-}
-.weather-card>div>span+span{
-    font-size: .8rem;
-}
-.date-container{
-    display: flex;
-    align-items: start !important;
-    flex-direction: column;
-    flex:1;
-}
-.temp-container>div{
-    display: flex;
-    flex-direction: column;
-    flex:1;
-    gap: 0.3rem;
-}
-.temp-container>div>div+div{
-    font-size: .75rem;
-}
-i{
-    font-size: 3rem;
+body,
+html {
+  margin-top: 0;
+  margin-left: 0;
 }
 
+body {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  background-image: url("../font/2843425.jpg");
+  background-attachment: fixed !important;
+  background-size: 100% 115%;
+  background-position: top;
+  background-repeat: no-repeat;
+  padding-bottom: 3rem;
+}
+.search-bar {
+  display: flex;
+  width: fit-content;
+  border-bottom: 0.15rem solid white;
+  padding: 0.5rem;
+  padding-top: 1rem;
+  align-items: center;
+}
+
+#search-input {
+  width: calc(var(--font-size) * 9);
+  -webkit-appearance: none;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 80%;
+}
+
+#search-input:focus {
+  outline: none;
+}
+
+.search-bar > i {
+  font-size: 80% !important;
+}
+
+.error {
+  font-size: 0.75rem;
+  padding-bottom: 1rem;
+  margin-top: 0.5rem;
+}
+
+.main {
+  color: white;
+  font-size: var(--font-size);
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row !important;
+}
+
+.buttons > div {
+  display: flex;
+  flex-direction: row !important;
+}
+
+.weather-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.weather-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  padding-bottom: 3rem;
+  padding-left: 3%;
+  border-radius: 5px;
+  background-color: #7f59ed80;
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 2rem;
+}
+.top > div {
+  display: flex;
+  flex-direction: column;
+}
+.top > div + div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.name-container {
+  font-size: 130%;
+}
+.name-container > span:last-child {
+  font-size: 40%;
+}
+
+.time {
+  font-size: 130%;
+}
+.date-container {
+  font-size: 60%;
+  display: flex;
+  align-items: start !important;
+  flex-direction: column;
+  flex: 1;
+}
+
+.bottom {
+  white-space: nowrap;
+  display: grid;
+  flex-wrap: wrap;
+  grid-template-columns: repeat(3, 1.2fr) !important;
+  grid-template-rows: 1fr 1fr !important;
+  row-gap: 2rem;
+  gap: 4rem;
+}
+
+.bottom > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 85%;
+  gap: 1.5%;
+}
+
+.bottom > div > div {
+  display: flex;
+  gap: 0.3rem;
+  justify-content: center;
+  align-items: center;
+  margin-right: auto;
+}
+
+.temp-container > div {
+  display: flex;
+  flex-direction: column;
+  align-items: start !important;
+}
+.temp-container > i {
+  align-self: flex-end;
+}
+.temp-container > div > div + div {
+  font-size: 50%;
+}
+
+i {
+  font-size: 200% !important;
+}
+
+.day-divider {
+  padding: 2%;
+  font-size: 120%;
+  font-weight: 800;
+}
+
+.temp-table {
+  white-space: nowrap;
+  height: 100%;
+  flex: 1;
+  display: grid !important;
+  grid-template-columns: repeat(2, 30%);
+  grid-template-rows: repeat(3, minmax(10%, 1fr));
+  gap: 0 !important;
+}
+
+.temp-table > div,
+.temp-table > i {
+  display: flex;
+  border-bottom: solid;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+.temp-table > i {
+  padding-left: 0 !important;
+}
+.temp-daily {
+  display: flex;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+}
+.temp-table > .icon {
+  display: flex;
+  justify-content: flex-start !important;
+  gap: 5%;
+}
+
+.temp-daily > div:last-child {
+  font-size: 60%;
+}
+.date-daily {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+.date-daily > div {
+  font-size: 130%;
+}
+
+.date-daily > div:last-child {
+  font-size: 60%;
+}
+
+.daily > .top > div:nth-child(2) {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.daily > .top > div:nth-child(2) > div {
+  font-size: 85% !important;
+}
+.daily > .bottom {
+  grid-template-columns: repeat(2, 25%) !important;
+  grid-template-rows: 1fr 1fr !important;
+}
+.buttons{
+  padding-top: 3%;
+  padding-bottom: 3%;
+}
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: 0.1rem solid;
+  border-style: none;
+  text-align: center;
+  color: black;
+  padding: 0.3rem;
+  font-size: 80%;
+  color: white;
+  width: calc(var(--font-size)*4);
+  border-radius: 3px;
+  font-weight: 800;
+
+}
+
+input[type="radio"] :hover {
+  cursor: pointer;
+}
+
+input[type="radio"]:checked {
+  border: 0.2rem solid white;
+}
+
+.hidden{
+opacity: 0 !important;
+
+}
