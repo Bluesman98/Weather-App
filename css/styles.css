@@ -83,6 +83,7 @@ body {
 
 .search-bar > i {
   font-size: 80% !important;
+  cursor: pointer;
 }
 
 .error {
@@ -101,6 +102,8 @@ body {
 .buttons {
   display: flex;
   flex-direction: row !important;
+  flex-wrap: wrap-reverse !important;
+  row-gap: 0.7rem;
 }
 
 .buttons > div {
