@@ -385,27 +385,43 @@ function titleCase(str) {
 
 function radioButtons(city_data, data, parent, units, units_symbol) {
   for (let j = 0; j < 2; j++) {
-    let radio = document.createElement("div");
+    let radio = document.createElement("form");
     radio.id = "radio-set" + j;
+
     for (let i = 0; i < 2; i++) {
+      //let form = document.createElement('form')
       let input = document.createElement("input");
+      let label = document.createElement('label')
+      radio.appendChild(input)
+      radio.appendChild(label)
+     // radio.append(form)
+     
       if (i == 0) {
         input.checked = "checked";
         if (j === 0) {
-          input.innerHTML = "Hourly";
+          input.id = 'hourly'
           input.value = "hourly";
+          label.innerHTML = "Hourly";
+          label.htmlFor = input.id
+
         } else {
-          input.innerHTML = "&#8451";
+          input.id = 'metric'
           input.value = "metric";
+          label.innerHTML = "&#8451";
+          label.htmlFor = input.id
         }
       }
       if (i == 1) {
         if (j === 0) {
-          input.innerHTML = "Daily";
+          input.id = 'daily'
           input.value = "daily";
+          label.innerHTML = "Daily";
+          label.htmlFor = input.id
         } else {
-          input.innerHTML = "&#8457";
+          input.id = 'imperial'
           input.value = "imperial";
+          label.innerHTML = "&#8457";
+          label.htmlFor = input.id
         }
       }
       input.type = "radio";
@@ -414,7 +430,8 @@ function radioButtons(city_data, data, parent, units, units_symbol) {
       } else {
         input.name = "units";
       }
-      radio.append(input);
+     // radio.append(input);
+
       input.addEventListener("click", () => {
         if (
           input.value === "hourly" &&
