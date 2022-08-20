@@ -5,7 +5,7 @@ async function findCity(city) {
   try {
     let response = await fetch(
       `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${key}`,
-      { mode: "cors" }
+      { method: "GET", headers: { accept: "aplication/json" } }
     );
     let data = await response.json();
     return data[0];
@@ -17,7 +17,7 @@ async function findCity(city) {
 async function getWeather(lat, lon, units = "metric") {
   let response = await fetch(
     `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=${units}&appid=${key}`,
-    { mode: "cors" }
+    { method: "GET", headers: { accept: "aplication/json" } }
   );
   let data = await response.json();
   return data;
