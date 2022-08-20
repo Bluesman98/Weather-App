@@ -395,7 +395,7 @@ function radioButtons(city_data, data, parent, units, units_symbol) {
           input.innerHTML = "Hourly";
           input.value = "hourly";
         } else {
-          input.innerHTML = '&#8451';
+          input.innerHTML = "&#8451";
           input.value = "metric";
         }
       }
@@ -430,30 +430,32 @@ function radioButtons(city_data, data, parent, units, units_symbol) {
           weatherDaily(data, units_symbol);
         } else if (input.value !== units) {
           if (input.value === "imperial") {
-            parent.classList.add('hidden')
+            parent.classList.add("hidden");
             document
               .querySelectorAll(".weather-container")
               .forEach((e) => e.remove());
 
-            weatherCard(city_data.name, "imperial").then(onFulfilled=>parent.classList.remove('hidden'));;
+            weatherCard(city_data.name, "imperial").then((onFulfilled) =>
+              parent.classList.remove("hidden")
+            );
             units = "imperial";
           } else if (input.value === "metric") {
-            parent.classList.add('hidden')
+            parent.classList.add("hidden");
             document
               .querySelectorAll(".weather-container")
               .forEach((e) => e.remove());
-              
-            weatherCard(city_data.name, "metric").then(onFulfilled=>parent.classList.remove('hidden'));
+
+            weatherCard(city_data.name, "metric").then((onFulfilled) =>
+              parent.classList.remove("hidden")
+            );
             units = "metric";
           }
-        //  parent.classList.remove('hidden')
         }
       });
     }
     parent.append(radio);
   }
 }
-
 
 //weatherCard("London");
 searchBar();

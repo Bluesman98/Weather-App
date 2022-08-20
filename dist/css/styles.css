@@ -272,7 +272,7 @@ i {
   grid-template-columns: repeat(2, 25%) !important;
   grid-template-rows: 1fr 1fr !important;
 }
-.buttons{
+.buttons {
   padding-top: 3%;
   padding-bottom: 3%;
 }
@@ -283,14 +283,14 @@ input[type="radio"] {
   justify-content: center;
   align-items: center;
   background-color: transparent;
-  border: 0.1rem solid; 
+  border: 0.1rem solid;
   border-style: none;
   text-align: center;
   color: black;
   padding: 0.3rem;
   font-size: 80%;
   color: white;
-  width: calc(var(--font-size)*4);
+  width: calc(var(--font-size) * 4);
   border-radius: 3px;
   font-weight: 800;
   cursor: pointer !important;
@@ -304,7 +304,6 @@ input[type="radio"]:checked {
   border: 0.2rem solid white;
 }
 
-.hidden{
-opacity: 0 !important;
-
+.hidden {
+  opacity: 0 !important;
 }
