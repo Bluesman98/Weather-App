@@ -275,10 +275,17 @@ i {
 .buttons {
   padding-top: 3%;
   padding-bottom: 3%;
+  gap:var(--font-size)
+}
+
+.buttons>form{
+  display: flex;
+  gap:var(--font-size)
 }
 input[type="radio"] {
-  appearance: none;
-  -webkit-appearance: none;
+  display: none;
+}
+label{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -293,14 +300,13 @@ input[type="radio"] {
   width: calc(var(--font-size) * 4);
   border-radius: 3px;
   font-weight: 800;
-  cursor: pointer !important;
 }
 
-input[type="radio"]:hover {
-  cursor: pointer !important;
+input[type="radio"]:hover + label{
+  cursor: pointer ;
 }
 
-input[type="radio"]:checked {
+input[type="radio"]:checked + label{
   border: 0.2rem solid white;
 }
 
