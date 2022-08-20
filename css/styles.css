@@ -283,7 +283,7 @@ input[type="radio"] {
   justify-content: center;
   align-items: center;
   background-color: transparent;
-  border: 0.1rem solid;
+  border: 0.1rem solid; 
   border-style: none;
   text-align: center;
   color: black;
